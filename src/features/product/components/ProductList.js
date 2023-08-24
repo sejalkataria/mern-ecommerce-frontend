@@ -4,17 +4,16 @@ import { Link } from 'react-router-dom';
 import {
   fetchAllProductsAsync,
   selectAllProducts,
+  fetchProductsByFiltersAsync
 } from '../productSlice';
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, ChevronLeftIcon, ChevronRightIcon, StarIcon } from '@heroicons/react/20/solid'
 
 const sortOptions = [
-  { name: 'Most Popular', href: '#', current: true },
-  { name: 'Best Rating', href: '#', current: false },
-  { name: 'Newest', href: '#', current: false },
-  { name: 'Price: Low to High', href: '#', current: false },
-  { name: 'Price: High to Low', href: '#', current: false },
+  { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
+  { name: 'Price: Low to High', sort: 'price', order: 'asc', current: false },
+  { name: 'Price: High to Low', sort: 'price', order: 'desc', current: false },
 ]
 
 const filters = [
@@ -289,12 +288,22 @@ function classNames(...classes) {
 }
 
 export default function ProductList() {
+  const [filter, setFilter] = useState({})
   const dispatch = useDispatch();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
   const products = useSelector(selectAllProducts)
 
   const handleFilter = (e, section, option) => {
+    const newFilter = { ...filter, [section.id]: option.value }
+    setFilter(newFilter)
+    dispatch(fetchProductsByFiltersAsync(newFilter))
     console.log(section.id, option.value)
+  }
+
+  const handleSort = (e, option) => {
+    const newFilter = { ...filter, _sort: option.sort, _order: option.order }
+    setFilter(newFilter)
+    dispatch(fetchProductsByFiltersAsync(newFilter))
   }
 
   useEffect(() => {
@@ -426,8 +435,8 @@ export default function ProductList() {
                           {sortOptions.map((option) => (
                             <Menu.Item key={option.name}>
                               {({ active }) => (
-                                <a
-                                  href={option.href}
+                                <p
+                                  onClick={e => handleSort(e, option)}
                                   className={classNames(
                                     option.current ? 'font-medium text-gray-900' : 'text-gray-500',
                                     active ? 'bg-gray-100' : '',
@@ -435,7 +444,7 @@ export default function ProductList() {
                                   )}
                                 >
                                   {option.name}
-                                </a>
+                                </p>
                               )}
                             </Menu.Item>
                           ))}
@@ -532,10 +541,10 @@ export default function ProductList() {
                                 <div className="mt-4 flex justify-between">
                                   <div>
                                     <h3 className="text-sm text-gray-700">
-                                      <a href={product.thumbnail}>
+                                      <div href={product.thumbnail}>
                                         <span aria-hidden="true" className="absolute inset-0" />
                                         {product.title}
-                                      </a>
+                                      </div>
                                     </h3>
                                     <p className="mt-1 text-sm text-gray-500">
                                       <StarIcon className='w-6 h-6 inline'></StarIcon>
