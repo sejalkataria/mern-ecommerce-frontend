@@ -2333,5 +2333,17 @@
       "label": "lighting",
       "checked": false
     }
+  ],
+  "users": [
+    {
+      "email": "test@gmail.com",
+      "password": "Test@123",
+      "id": 1
+    },
+    {
+      "email": "demo@gmail.com",
+      "password": "Test@123",
+      "id": 2
+    }
   ]
 }
