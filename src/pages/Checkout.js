@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteItemFromCartAsync, selectItems, updateCartAsync } from '../features/cart/cartSlice'
-import { createOrderAsync } from '../features/order/orderSlice'
+import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSlice'
 import { Link, Navigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
 import { selectLoggedInUser, updateUserAsync } from '../features/auth/authSlice'
@@ -10,6 +10,7 @@ function Checkout() {
     const [open, setOpen] = useState(true)
     const dispatch = useDispatch()
     const items = useSelector(selectItems)
+    const currentOrder = useSelector(selectCurrentOrder)
     const totalAmount = items.reduce((amount, item) => item.price * item.quantity + amount, 0)
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
 
@@ -33,8 +34,17 @@ function Checkout() {
     }
 
     const handleOrder = (e) => {
-        const order = { items: items, totalAmount: totalAmount, totalItems: totalItems, user: user, paymentMethod: paymentMethod, selectedAddress: selectedAddress }
-        dispatch(createOrderAsync(order))
+        if (selectedAddress && paymentMethod) {
+            const order = {
+                items, totalAmount, totalItems, user,
+                paymentMethod, selectedAddress, status: 'pending'
+            }
+            dispatch(createOrderAsync(order))
+        }
+        else {
+            alert('Enter Address and Payment method')
+        }
+
     }
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
@@ -44,6 +54,7 @@ function Checkout() {
     return (
         <>
             {!items.length && <Navigate to="/" replace={true}></Navigate>}
+            {currentOrder && <Navigate to={`/order-success/${currentOrder.id}`} replace={true}></Navigate>}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid gird-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
                     <div className="lg:col-span-3">

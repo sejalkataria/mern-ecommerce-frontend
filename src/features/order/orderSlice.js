@@ -3,7 +3,8 @@ import { createOrder } from "./orderAPI"
 
 const initialState = {
     status: 'idle',
-    orders: []
+    orders: [],
+    currentOrder: null
 
 }
 
@@ -19,7 +20,9 @@ export const orderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
-
+        resetOrder: (state) => {
+            state.currentOrder = null
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -27,10 +30,15 @@ export const orderSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(createOrderAsync.fulfilled, (state, action) => {
-                state.status = 'idle'
-                state.orders.push(action.payload)
+                state.status = 'idle';
+                state.orders.push(action.payload);
+                state.currentOrder = action.payload;
             })
     }
 })
+
+export const { resetOrder } = orderSlice.actions
+
+export const selectCurrentOrder = (state) => state.order.currentOrder;
 
 export default orderSlice.reducer;

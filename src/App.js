@@ -10,10 +10,12 @@ import {
 } from "react-router-dom";
 import Checkout from './pages/Checkout';
 import ProductDetailPage from './pages/ProductDetailPage';
+import PageNotFound from './pages/404';
 import Protected from './features/auth/components/Proctected';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from './features/auth/authSlice';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
+import OrderSuccessPage from './pages/OrderSuccessPage';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,16 @@ const router = createBrowserRouter([
       <Protected>
         <ProductDetailPage></ProductDetailPage>
       </Protected>,
+  },
+  {
+    path: "/order-success/:id",
+    element:
+      <OrderSuccessPage></OrderSuccessPage>
+  },
+  {
+    path: "*",
+    element:
+      <PageNotFound></PageNotFound>,
   },
 ])
 
