@@ -17,6 +17,8 @@ import { selectLoggedInUser } from './features/auth/authSlice';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import UserOrdersPage from './pages/UserOrdersPage';
+import UserProfilePage from './pages/UserProfilePage';
+import { fetchLoggedInUserAsync } from './features/user/userSlice';
 
 const router = createBrowserRouter([
   {
@@ -67,6 +69,11 @@ const router = createBrowserRouter([
       <UserOrdersPage></UserOrdersPage>
   },
   {
+    path: "/profile",
+    element:
+      <UserProfilePage></UserProfilePage>
+  },
+  {
     path: "*",
     element:
       <PageNotFound></PageNotFound>,
@@ -80,6 +87,7 @@ function App() {
   useEffect(() => {
     if (user) {
       dispatch(fetchItemsByUserIdAsync(user.id))
+      dispatch(fetchLoggedInUserAsync(user.id))
     }
   }, [dispatch, user])
 

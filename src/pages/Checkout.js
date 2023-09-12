@@ -4,7 +4,8 @@ import { deleteItemFromCartAsync, selectItems, updateCartAsync } from '../featur
 import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSlice'
 import { Link, Navigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
-import { selectLoggedInUser, updateUserAsync } from '../features/auth/authSlice'
+import { updateUserAsync } from '../features/auth/authSlice'
+import { selectUserInfo } from '../features/user/userSlice'
 
 function Checkout() {
     const [open, setOpen] = useState(true)
@@ -49,7 +50,7 @@ function Checkout() {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
 
-    const user = useSelector(selectLoggedInUser)
+    const user = useSelector(selectUserInfo)
 
     return (
         <>

@@ -2340,13 +2340,22 @@
       "password": "Test@123",
       "addresses": [
         {
-          "name": "sejal",
+          "name": "Sejal edited",
           "email": "sejal@gmail.com",
-          "phone": "123456789",
+          "phone": "12345678",
           "street": "kanpura",
           "city": "vyara",
           "state": "gujarat",
-          "pinCode": "098765"
+          "pinCode": "123456"
+        },
+        {
+          "name": "new",
+          "email": "sejal@gmail.com",
+          "city": "Delhi",
+          "state": "Delhi",
+          "pinCode": "100989",
+          "phone": "12345678123456789",
+          "street": "12th cross"
         }
       ],
       "id": 1
@@ -2354,6 +2363,66 @@
   ],
   "cart": [],
   "orders": [
+    {
+      "items": [
+        {
+          "title": "Samsung Universe 9",
+          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
+          "price": 1249,
+          "discountPercentage": 15.46,
+          "rating": 4.09,
+          "stock": 36,
+          "brand": "Samsung",
+          "category": "smartphones",
+          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
+          "images": [
+            "https://i.dummyjson.com/data/products/3/1.jpg"
+          ],
+          "quantity": 1,
+          "user": 1,
+          "id": 1
+        }
+      ],
+      "totalAmount": 1249,
+      "totalItems": 1,
+      "user": {
+        "email": "sejal@gmail.com",
+        "password": "Test@123",
+        "addresses": [
+          {
+            "name": "Sejal",
+            "email": "sejal@gmail.com",
+            "phone": "12345678",
+            "street": "kanpura",
+            "city": "vyara",
+            "state": "gujarat",
+            "pinCode": "123456"
+          },
+          {
+            "name": "Sejal",
+            "email": "sejal@gmail.com",
+            "phone": "12345678",
+            "street": "piplod",
+            "city": "surat",
+            "state": "gujarat",
+            "pinCode": "098765"
+          }
+        ],
+        "id": 1
+      },
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "Sejal",
+        "email": "sejal@gmail.com",
+        "phone": "12345678",
+        "street": "kanpura",
+        "city": "vyara",
+        "state": "gujarat",
+        "pinCode": "123456"
+      },
+      "status": "pending",
+      "id": 1
+    },
     {
       "items": [
         {
@@ -2384,29 +2453,38 @@
         "password": "Test@123",
         "addresses": [
           {
-            "name": "sejal",
+            "name": "Sejal edited",
             "email": "sejal@gmail.com",
-            "phone": "123456789",
+            "phone": "12345678",
             "street": "kanpura",
             "city": "vyara",
             "state": "gujarat",
-            "pinCode": "098765"
+            "pinCode": "123456"
+          },
+          {
+            "name": "new",
+            "email": "sejal@gmail.com",
+            "city": "Delhi",
+            "state": "Delhi",
+            "pinCode": "100989",
+            "phone": "12345678123456789",
+            "street": "12th cross"
           }
         ],
         "id": 1
       },
-      "paymentMethod": "card",
+      "paymentMethod": "cash",
       "selectedAddress": {
-        "name": "sejal",
+        "name": "new",
         "email": "sejal@gmail.com",
-        "phone": "123456789",
-        "street": "kanpura",
-        "city": "vyara",
-        "state": "gujarat",
-        "pinCode": "098765"
+        "city": "Delhi",
+        "state": "Delhi",
+        "pinCode": "100989",
+        "phone": "12345678123456789",
+        "street": "12th cross"
       },
       "status": "pending",
-      "id": 1
+      "id": 2
     }
   ]
 }
