@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchAllProducts, fetchProductsByFilters, fetchBrands, fetchCategories, fetchProductById } from './productAPI';
+import { fetchAllProducts, fetchProductsByFilters, fetchBrands, fetchCategories, fetchProductById, createProduct, updateProduct } from './productAPI';
 
 const initialState = {
   products: [],
@@ -18,7 +18,7 @@ export const fetchAllProductsAsync = createAsyncThunk(
   }
 );
 
-export const fetchAllProductByIdAsync = createAsyncThunk(
+export const fetchProductByIdAsync = createAsyncThunk(
   'product/fetchProductById',
   async (id) => {
     const response = await fetchProductById(id);
@@ -50,17 +50,29 @@ export const fetchCategoriesAsync = createAsyncThunk(
   }
 );
 
+export const createProductAsync = createAsyncThunk(
+  'product/createProduct',
+  async (product) => {
+    const response = await createProduct(product);
+    return response.data;
+  }
+);
+
+export const updateProductAsync = createAsyncThunk(
+  'product/updateProduct',
+  async (update) => {
+    const response = await updateProduct(update);
+    return response.data;
+  }
+);
+
 export const productSlice = createSlice({
   name: 'product',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    increment: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.value += 1;
+    clearSelectedProduct: (state) => {
+      state.selectedProduct = null;
     },
   },
   extraReducers: (builder) => {
@@ -94,19 +106,34 @@ export const productSlice = createSlice({
         state.status = 'idle'
         state.categories = action.payload
       })
-      .addCase(fetchAllProductByIdAsync.pending, (state) => {
+      .addCase(fetchProductByIdAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchAllProductByIdAsync.fulfilled, (state, action) => {
+      .addCase(fetchProductByIdAsync.fulfilled, (state, action) => {
         state.status = 'idle'
         state.selectedProduct = action.payload
+      })
+      .addCase(createProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(createProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle'
+        state.products.push(action.payload)
+      })
+      .addCase(updateProductAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateProductAsync.fulfilled, (state, action) => {
+        state.status = 'idle'
+        const index = state.products.findIndex(product => product.id === action.payload.id)
+        state.products[index] = action.payload
       })
   },
 });
 
 
 
-export const { increment } = productSlice.actions;
+export const { clearSelectedProduct } = productSlice.actions;
 
 export const selectAllProducts = (state) => state.product.products;
 export const selectTotalItems = (state) => state.product.totalItems;
