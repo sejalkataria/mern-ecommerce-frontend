@@ -16,7 +16,7 @@ import {
     ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon,
     ChevronLeftIcon, ChevronRightIcon, StarIcon
 } from '@heroicons/react/20/solid';
-import { ITEMS_PER_PAGE } from '../../../app/constants';
+import { ITEMS_PER_PAGE, discountedPrice } from '../../../app/constants';
 
 const sortOptions = [
     { name: 'Best Rating', sort: 'rating', order: 'desc', current: false },
@@ -435,7 +435,7 @@ function ProductGrid({ products }) {
                                                 <span className="align-bottom">{product.rating}</span></p>
                                         </div>
                                         <div>
-                                            <p className="text-sm block font-medium text-gray-900">$ {Math.round(product.price * (1 - product.discountPercentage / 100))}</p>
+                                            <p className="text-sm block font-medium text-gray-900">$ {discountedPrice(product)}</p>
                                             <p className="text-sm block line-through font-medium text-gray-400">$ {product.price}</p>
                                         </div>
                                     </div>
