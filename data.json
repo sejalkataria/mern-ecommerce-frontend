@@ -2373,29 +2373,20 @@
   ],
   "users": [
     {
-      "email": "sejal@gmail.com",
+      "email": "user@gmail.com",
       "password": "Test@123",
-      "role": "user",
       "addresses": [
         {
-          "name": "Sejal edited",
-          "email": "sejal@gmail.com",
-          "phone": "12345678",
-          "street": "kanpura",
-          "city": "vyara",
-          "state": "gujarat",
-          "pinCode": "123456"
-        },
-        {
-          "name": "new",
-          "email": "sejal@gmail.com",
+          "name": "user",
+          "email": "user@gmail.com",
+          "phone": "123456778",
+          "street": "12th cross",
           "city": "Delhi",
           "state": "Delhi",
-          "pinCode": "100989",
-          "phone": "12345678123456789",
-          "street": "12th cross"
+          "pinCode": "1234567"
         }
       ],
+      "role": "user",
       "id": 1
     },
     {
@@ -2411,71 +2402,11 @@
     {
       "items": [
         {
-          "title": "Samsung Universe 9",
-          "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-          "price": 1249,
-          "discountPercentage": 15.46,
-          "rating": 4.09,
-          "stock": 36,
-          "brand": "Samsung",
-          "category": "smartphones",
-          "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-          "images": [
-            "https://i.dummyjson.com/data/products/3/1.jpg"
-          ],
-          "quantity": 1,
-          "user": 1,
-          "id": 1
-        }
-      ],
-      "totalAmount": 1249,
-      "totalItems": 1,
-      "user": {
-        "email": "sejal@gmail.com",
-        "password": "Test@123",
-        "addresses": [
-          {
-            "name": "Sejal",
-            "email": "sejal@gmail.com",
-            "phone": "12345678",
-            "street": "kanpura",
-            "city": "vyara",
-            "state": "gujarat",
-            "pinCode": "123456"
-          },
-          {
-            "name": "Sejal",
-            "email": "sejal@gmail.com",
-            "phone": "12345678",
-            "street": "piplod",
-            "city": "surat",
-            "state": "gujarat",
-            "pinCode": "098765"
-          }
-        ],
-        "id": 1
-      },
-      "paymentMethod": "card",
-      "selectedAddress": {
-        "name": "Sejal",
-        "email": "sejal@gmail.com",
-        "phone": "12345678",
-        "street": "kanpura",
-        "city": "vyara",
-        "state": "gujarat",
-        "pinCode": "123456"
-      },
-      "status": "dispatched",
-      "id": 1
-    },
-    {
-      "items": [
-        {
           "title": "iPhone X",
           "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-          "price": 899,
+          "price": 1000,
           "discountPercentage": 17.94,
-          "rating": 4.44,
+          "rating": 0,
           "stock": 34,
           "brand": "Apple",
           "category": "smartphones",
@@ -2486,50 +2417,43 @@
             "https://i.dummyjson.com/data/products/2/3.jpg",
             "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
           ],
+          "productId": 2,
           "quantity": 1,
           "user": 1,
           "id": 1
         }
       ],
-      "totalAmount": 899,
+      "totalAmount": 821,
       "totalItems": 1,
       "user": {
-        "email": "sejal@gmail.com",
+        "email": "user@gmail.com",
         "password": "Test@123",
         "addresses": [
           {
-            "name": "Sejal edited",
-            "email": "sejal@gmail.com",
-            "phone": "12345678",
-            "street": "kanpura",
-            "city": "vyara",
-            "state": "gujarat",
-            "pinCode": "123456"
-          },
-          {
-            "name": "new",
-            "email": "sejal@gmail.com",
+            "name": "user",
+            "email": "user@gmail.com",
+            "phone": "123456778",
+            "street": "12th cross",
             "city": "Delhi",
             "state": "Delhi",
-            "pinCode": "100989",
-            "phone": "12345678123456789",
-            "street": "12th cross"
+            "pinCode": "1234567"
           }
         ],
+        "role": "user",
         "id": 1
       },
       "paymentMethod": "cash",
       "selectedAddress": {
-        "name": "new",
-        "email": "sejal@gmail.com",
+        "name": "user",
+        "email": "user@gmail.com",
+        "phone": "123456778",
+        "street": "12th cross",
         "city": "Delhi",
         "state": "Delhi",
-        "pinCode": "100989",
-        "phone": "12345678123456789",
-        "street": "12th cross"
+        "pinCode": "1234567"
       },
       "status": "pending",
-      "id": 2
+      "id": 1
     }
   ]
 }
