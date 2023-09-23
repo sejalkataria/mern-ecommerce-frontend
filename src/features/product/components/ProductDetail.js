@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react'
-import { StarIcon } from '@heroicons/react/20/solid'
-import { RadioGroup } from '@headlessui/react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { StarIcon } from '@heroicons/react/20/solid';
+import { RadioGroup } from '@headlessui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Grid } from 'react-loader-spinner';
 
-import { fetchProductByIdAsync, selectProductById } from '../productSlice'
-import { selectLoggedInUser } from '../../auth/authSlice'
-import { useParams } from 'react-router-dom'
-import { addToCartAsync, selectItems } from '../../cart/cartSlice'
-import { discountedPrice } from '../../../app/constants'
+import { fetchProductByIdAsync, selectProductById, selectProductListStatus } from '../productSlice';
+import { selectLoggedInUser } from '../../auth/authSlice';
+import { useParams } from 'react-router-dom';
+import { addToCartAsync, selectItems } from '../../cart/cartSlice';
+import { discountedPrice } from '../../../app/constants';
+import { useAlert } from "react-alert";
 
 
 const colors = [
@@ -39,13 +41,15 @@ function classNames(...classes) {
 }
 
 export default function ProductDetail() {
-  const [selectedColor, setSelectedColor] = useState(colors[0])
-  const [selectedSize, setSelectedSize] = useState(sizes[2])
-  const product = useSelector(selectProductById)
-  const user = useSelector(selectLoggedInUser)
-  const items = useSelector(selectItems)
-  const dispatch = useDispatch()
-  const params = useParams()
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [selectedSize, setSelectedSize] = useState(sizes[2]);
+  const product = useSelector(selectProductById);
+  const user = useSelector(selectLoggedInUser);
+  const items = useSelector(selectItems);
+  const status = useSelector(selectProductListStatus);
+  const dispatch = useDispatch();
+  const params = useParams();
+  const alert = useAlert();
 
 
   const handleCart = (e) => {
@@ -54,9 +58,10 @@ export default function ProductDetail() {
       const newItem = { ...product, productId: product.id, quantity: 1, user: user.id }
       delete newItem['id']
       dispatch(addToCartAsync(newItem))
+      alert.success('Item added to Cart')
     }
     else {
-      console.log('This item is already added')
+      alert.error('Item Already added')
     }
   }
 
@@ -66,6 +71,18 @@ export default function ProductDetail() {
 
   return (
     <div className="bg-white">
+      {status === 'loading' ?
+        <Grid
+          width="80"
+          height="80"
+          color="rgb(79,70,229)"
+          ariaLabel="grid-loading"
+          radius="12.5"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+        : null}
       {product && (<div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
