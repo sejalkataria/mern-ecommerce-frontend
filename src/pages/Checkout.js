@@ -4,8 +4,7 @@ import { deleteItemFromCartAsync, selectItems, updateCartAsync } from '../featur
 import { createOrderAsync, selectCurrentOrder } from '../features/order/orderSlice'
 import { Link, Navigate } from "react-router-dom"
 import { useForm } from 'react-hook-form'
-import { updateUserAsync } from '../features/auth/authSlice'
-import { selectUserInfo } from '../features/user/userSlice'
+import { selectUserInfo, updateUserAsync } from '../features/user/userSlice'
 import { discountedPrice } from '../app/constants'
 
 function Checkout() {
