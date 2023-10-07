@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Modal from "../../common/Modal";
 import { useState } from 'react';
+import { useAlert } from 'react-alert';
 
 function ProductForm() {
     const { register, handleSubmit, setValue, reset, formState: { errors } } = useForm()
@@ -15,6 +16,7 @@ function ProductForm() {
     const params = useParams()
     const selectedProduct = useSelector(selectProductById)
     const [openModal, setOpenModal] = useState(null)
+    const alert = useAlert()
 
     useEffect(() => {
         if (params.id) {
@@ -63,13 +65,15 @@ function ProductForm() {
                     product.stock = +product.stock;
                     product.discountPercentage = +product.discountPercentage;
                     if (params.id) {
-                        product.id = params.id
-                        product.rating = selectedProduct.rating || 0
-                        dispatch(updateProductAsync(product))
+                        product.id = params.id;
+                        product.rating = selectedProduct.rating || 0;
+                        dispatch(updateProductAsync(product));
+                        alert.success('Product Updated');
                         reset()
                     }
                     else {
-                        dispatch(createProductAsync(product))
+                        dispatch(createProductAsync(product));
+                        alert.success('Product Created');
                         reset()
                     }
 
