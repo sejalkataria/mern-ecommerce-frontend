@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Grid } from 'react-loader-spinner';
 
 import { fetchProductByIdAsync, selectProductById, selectProductListStatus } from '../productSlice';
-import { selectLoggedInUser } from '../../auth/authSlice';
 import { useParams } from 'react-router-dom';
 import { addToCartAsync, selectItems } from '../../cart/cartSlice';
 import { discountedPrice } from '../../../app/constants';
@@ -44,7 +43,6 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const product = useSelector(selectProductById);
-  const user = useSelector(selectLoggedInUser);
   const items = useSelector(selectItems);
   const status = useSelector(selectProductListStatus);
   const dispatch = useDispatch();
@@ -55,7 +53,7 @@ export default function ProductDetail() {
   const handleCart = (e) => {
     e.preventDefault()
     if (items.findIndex(item => item.product.id === product.id) < 0) {
-      const newItem = { product: product.id, quantity: 1, user: user.id }
+      const newItem = { product: product.id, quantity: 1 }
       dispatch(addToCartAsync(newItem))
       alert.success('Item added to Cart')
     }
