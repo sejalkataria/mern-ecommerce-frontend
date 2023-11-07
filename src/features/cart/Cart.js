@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate } from "react-router-dom";
 import { Grid } from 'react-loader-spinner';
-import { deleteItemFromCartAsync, selectItems, selectCartStatus, updateCartAsync } from './cartSlice';
+import { deleteItemFromCartAsync, selectItems, selectCartStatus, updateCartAsync, selectCartLoaded } from './cartSlice';
 import { discountedPrice } from '../../app/constants';
 import Modal from '../common/Modal';
 
@@ -13,6 +13,7 @@ export default function Cart() {
     const dispatch = useDispatch()
     const items = useSelector(selectItems)
     const status = useSelector(selectCartStatus)
+    const cartLoaded = useSelector(selectCartLoaded)
     const totalAmount = items.reduce((amount, item) => discountedPrice(item.product) * item.quantity + amount, 0)
     const totalItems = items.reduce((total, item) => item.quantity + total, 0)
 
@@ -26,7 +27,7 @@ export default function Cart() {
 
     return (
         <>
-            {!items.length && <Navigate to="/" replace={true}></Navigate>}
+            {!items.length && cartLoaded && <Navigate to="/" replace={true}></Navigate>}
             <div className="mx-auto mt-24 bg-white max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                     <h1 className='text-4xl my-5 font-bold tracking-tight text-gray-900'>

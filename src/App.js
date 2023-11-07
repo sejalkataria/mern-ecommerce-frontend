@@ -15,7 +15,7 @@ import PageNotFound from './pages/404';
 import Protected from './features/auth/components/Proctected';
 import ProtectedAdmin from './features/auth/components/ProtectedAdmin';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectLoggedInUser } from './features/auth/authSlice';
+import { checkAuthAsync, selectLoggedInUser, selectUserChecked } from './features/auth/authSlice';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import OrderSuccessPage from './pages/OrderSuccessPage';
 import UserOrdersPage from './pages/UserOrdersPage';
@@ -147,7 +147,13 @@ const router = createBrowserRouter([
 
 function App() {
   const user = useSelector(selectLoggedInUser)
+  const userChecked = useSelector(selectUserChecked)
   const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    dispatch(checkAuthAsync())
+  }, [dispatch])
 
   useEffect(() => {
     if (user) {
@@ -159,9 +165,9 @@ function App() {
   return (
     <>
       <div className="App">
-        <Provider template={AlertTemplate} {...options}>
+        {userChecked && <Provider template={AlertTemplate} {...options}>
           <RouterProvider router={router} />
-        </Provider>
+        </Provider>}
       </div>
     </>
   );
